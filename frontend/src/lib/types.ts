@@ -11,6 +11,12 @@ export interface Game {
     ja: string;
   };
   events: GameEvent[];
+  awayHits: number;
+  homeHits: number;
+  awayErrors: number;
+  homeErrors: number;
+  topPerformer: string;
+  winningPitcher: string;
 }
 
 export interface GameEvent {
