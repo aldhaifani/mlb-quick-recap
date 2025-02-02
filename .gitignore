@@ -1,0 +1,59 @@
+# Python Backend
+__pycache__/
+*.so
+build/
+dist/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+.venv
+
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.pydevproject
+.settings/
+
+# FastAPI specific
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+.testmondata
+.testmondata-journal
+
+# Logs
+*.log
+logs/
+log/
+
+# Local development
+.env.local
+.env.development
+.env.test
+.env.production
+
+# System
+.DS_Store
+Thumbs.db
+
+# Frontend - Node
+node_modules/
+
+# Frontend - Cache
+.cache/
+.mf/
+.rollup.cache/
+.vite/
+
+# Frontend - Temporary files
+*.temp
+*.tmp
+.DS_Store
