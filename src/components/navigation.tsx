@@ -19,7 +19,7 @@ export function Navigation() {
             <a href="/">Dashboard</a>
           </Button>
           <Button variant="secondary" asChild>
-            <a href="/about">About</a>
+            <a href="../about">About</a>
           </Button>
         </div>
       </div>
