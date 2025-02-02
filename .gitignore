@@ -3,6 +3,7 @@ __pycache__/
 *.so
 build/
 dist/
+.python-version
 
 # Virtual Environment
 venv/
