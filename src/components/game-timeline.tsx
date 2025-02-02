@@ -6,7 +6,7 @@ interface GameTimelineProps {
 
 export function GameTimeline({ events }: GameTimelineProps) {
   return (
-    <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:-translate-x-px before:bg-gradient-to-b before:from-transparent before:via-secondary before:to-transparent">
+    <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:-translate-x-px before:bg-gradient-to-b before:from-transparent before:via-secondary before:to-transparent md:space-y-0 md:before:mx-auto md:before:translate-x-0">
       {events.map((event, index) => (
         <div
           key={index}
