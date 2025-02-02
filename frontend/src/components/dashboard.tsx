@@ -38,7 +38,7 @@ export function Dashboard({ games, onGameSelect }: DashboardProps) {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-4xl font-bold text-primary">MLB Quick Recap</h1>
+      <h1 className="text-4xl font-bold text-primary">Dashboard</h1>
       <FeaturedRecap game={games[0]} onGameSelect={onGameSelect} />
       <div className="flex justify-between items-center mb-6">
         <SearchBar onSearch={handleSearch} />
