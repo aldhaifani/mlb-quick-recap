@@ -44,7 +44,7 @@ export function GameDetails({
       <DialogContent className="max-w-3xl h-[80vh]">
         <DialogHeader>
           <DialogTitle>
-            {game.awayTeam} @ {game.homeTeam} - Game Highlights
+            {game.teams.away.name} @ {game.teams.home.name} - Game Highlights
           </DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-full pr-4" ref={scrollRef}>

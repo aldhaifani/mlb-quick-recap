@@ -7,13 +7,13 @@ interface KeyStatsProps {
 export function KeyStats({ game }: KeyStatsProps) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <StatCard title="Hits" value={`${game.awayHits} - ${game.homeHits}`} />
+      <StatCard title="Hits" value={`${game.away_hits} - ${game.home_hits}`} />
       <StatCard
         title="Errors"
-        value={`${game.awayErrors} - ${game.homeErrors}`}
+        value={`${game.away_errors} - ${game.home_errors}`}
       />
-      <StatCard title="Top Performer" value={game.topPerformer} />
-      <StatCard title="Winning Pitcher" value={game.winningPitcher} />
+      <StatCard title="Top Performer" value={game.top_performer} />
+      <StatCard title="Winning Pitcher" value={game.winning_pitcher} />
     </div>
   );
 }

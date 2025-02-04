@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Game } from "@/lib/types";
+import type { Game } from "@/lib/types";
 
 interface GameRecapProps {
   game: Game;
@@ -12,13 +12,15 @@ export function GameRecap({ game, onGameSelect }: GameRecapProps) {
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader>
         <CardTitle className="text-lg">
-          {game.awayTeam} @ {game.homeTeam}
+          {game.teams.away.name} @ {game.teams.home.name}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-muted-foreground mb-2">{game.date}</p>
+        <p className="text-sm text-muted-foreground mb-2">
+          {new Date(game.date).toLocaleDateString()}
+        </p>
         <p className="text-lg font-semibold mb-2">
-          Final: {game.awayScore} - {game.homeScore}
+          Final: {game.score.away} - {game.score.home}
         </p>
         <p className="mb-4 text-sm">{game.summary.en.slice(0, 100)}...</p>
         <Button onClick={() => onGameSelect(game)} variant="secondary">
