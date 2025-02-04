@@ -1,5 +1,5 @@
 # MLB Quick Recap
-![logo](./public/mlb-quick-recap-icon.png)
+![logo](./public/mlb-quick-recap-icon-128.png)
 A modern web application that provides quick and concise recaps of MLB games, allowing users to easily browse and search through game summaries, highlights, and key statistics.
 
 Live here: [MLB Quick Recaps](https://mld-quick-recap-frontend-150472142616.us-central1.run.app/)
