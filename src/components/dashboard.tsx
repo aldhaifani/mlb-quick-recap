@@ -4,7 +4,7 @@ import { TeamSelect } from "@/components/team-select";
 import { SeasonSelect } from "@/components/season-select";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, ArrowUpDown } from "lucide-react";
+import { Search, ArrowUpDown, Loader2 } from "lucide-react";
 import type { Game, Team } from "@/lib/types";
 
 interface DashboardProps {
@@ -59,7 +59,7 @@ export function Dashboard({
 
   return (
     <div className="space-y-8">
-      <h1 className="text-4xl font-bold text-primary">MLB Quick Recap</h1>
+      <h1 className="text-4xl font-bold text-primary">Dashboard</h1>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <TeamSelect
@@ -76,7 +76,14 @@ export function Dashboard({
             onClick={onLoad}
             disabled={!selectedTeam || !selectedSeason || isLoading}
           >
-            {isLoading ? "Loading..." : "Load"}
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              "Load"
+            )}
           </Button>
         </div>
         {games.length > 0 && (
@@ -102,7 +109,11 @@ export function Dashboard({
           </div>
         )}
       </div>
-      <GameRecapList games={filteredGames} onGameSelect={onGameSelect} />
+      <GameRecapList
+        games={filteredGames}
+        onGameSelect={onGameSelect}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Dashboard } from "@/components/dashboard";
+import { AnnouncementBar } from "@/components/announcement-bar";
 import { GameRecapDetailed } from "@/components/game-recap-detailed";
 import { Navigation } from "@/components/navigation";
 import type { ApiResponse, Game } from "@/lib/types";
 import { teams } from "@/lib/teams";
 import AboutPage from "@/about";
-import { Button } from "./components/ui/button";
-import { ArrowUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowUp, Loader2 } from "lucide-react";
 import { GameDataProvider, useGameData } from "@/contexts/GameDataContext";
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -36,40 +37,46 @@ function AppContent() {
     setIsLoading,
   } = useGameData();
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const fetchGames = async () => {
+  const fetchGames = async (isLoadMore = false) => {
     if (!selectedTeam || !selectedSeason) return;
 
-    setIsLoading(true);
+    const loadingState = isLoadMore ? setIsLoadingMore : setIsLoading;
+    loadingState(true);
     try {
       const response = await fetch(
         `https://mld-quick-recap-backend-150472142616.us-central1.run.app/api/1/games?season=${selectedSeason}&team_id=${selectedTeam}&page=${page}`
       );
       const data: ApiResponse = await response.json();
-      setGames((prevGames: Game[]) => {
-        const newGames = data.games.filter(
-          (newGame) =>
-            !prevGames.some((existingGame) => existingGame.id === newGame.id)
-        );
-        return [...prevGames, ...newGames];
-      });
+      if (isLoadMore) {
+        setGames((prevGames: Game[]) => {
+          const newGames = data.games.filter(
+            (newGame) =>
+              !prevGames.some((existingGame) => existingGame.id === newGame.id)
+          );
+          return [...prevGames, ...newGames];
+        });
+      } else {
+        setGames(data.games);
+      }
       setHasMore(data.games.length > 0);
       setPage((prevPage) => prevPage + 1);
     } catch (error) {
       console.error("Error fetching games:", error);
     }
-    setIsLoading(false);
+    loadingState(false);
   };
 
   const handleLoad = () => {
     setGames([]);
     setPage(1);
     setHasMore(true);
-    fetchGames();
+    fetchGames(false);
   };
 
   const handleLoadMore = () => {
-    fetchGames();
+    fetchGames(true);
   };
 
   const handleBackToTop = () => {
@@ -88,6 +95,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      {window.location.pathname === "/" && !selectedGame && <AnnouncementBar />}
       <Routes>
         <Route
           path="/"
@@ -114,8 +122,15 @@ function AppContent() {
                   />
                   {games.length > 0 && hasMore && (
                     <div className="mt-8 text-center">
-                      <Button onClick={handleLoadMore} disabled={isLoading}>
-                        {isLoading ? "Loading..." : "Load More"}
+                      <Button onClick={handleLoadMore} disabled={isLoadingMore}>
+                        {isLoadingMore ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Loading More...
+                          </>
+                        ) : (
+                          "Load More"
+                        )}
                       </Button>
                     </div>
                   )}
