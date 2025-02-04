@@ -6,7 +6,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-background">
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-primary mb-8">
-          About MLB Quick Recap
+          About
         </h1>
         <div className="grid gap-8 md:grid-cols-2">
           <Card>
@@ -72,7 +72,7 @@ export default function AboutPage() {
               <CardTitle>Source Code</CardTitle>
             </CardHeader>
             <CardContent>
-              <Button asChild variant="outline" className="w-full sm:w-auto">
+              <Button asChild variant="outline" className="w-full sm:w-auto mb-2">
                 <a
                   href="https://github.com/aldhaifani/mlb-quick-recap"
                   target="_blank"
